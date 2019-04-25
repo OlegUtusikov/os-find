@@ -14,6 +14,7 @@ run:
 	cd build && ./Find ./../test_dir -name file1.txt
 	cd build && ./Find ./../test_dir -size =26
 	cd build && ./Find ./../test_dir -name test1
+	cd build && ./Find ./../test_dir -size -10 -inum 2246549 -exec /user/bin/sha1
 
 clean:
 	rm -rf build

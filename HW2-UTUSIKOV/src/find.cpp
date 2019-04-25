@@ -202,12 +202,17 @@ int find (const std::string& path, const std::vector<std::string>& args, char** 
                     std::cout << pi << std::endl;
                     params.push_back(pi);
                 }
-                try {
-                    execute_program(params, env_vars);
-                } catch (std::system_error &e) {
-                    throw e;
+                if (params.size() == 1) {
+                    std::cerr << "Count of paths for exec = 0." << std::endl;
+                } else {
+                    try {
+                        execute_program(params, env_vars);
+                    } catch (std::system_error &e) {
+                        throw e;
+                    }
                 }
-                tmp.clear();
+                // I am not sure, that we mast clear a tmp after -exec, in the discription this theme doesn't discribe.
+                //tmp.clear();
             } else {
                 std::error_code ec(errno, std::system_category());
                 throw std::system_error(ec, "Unknown key!");
